@@ -35,55 +35,34 @@ cancerdata<- read.csv("C:/Users/NIKIL/Desktop/Cancer data/breast-cancer-wisconsi
  $ X1.4    : int  2 1 7 1 7 1 1 1 1 1 ...
  $ X1.5    : int  1 1 1 1 1 1 1 5 1 1 ...
  $ X2.1    : int  2 2 2 2 4 2 2 2 2 2 ...
-> #lable the Data set
+# lable the Data set
 > names(cancerdata)<- c("id","Clump Thickness","Uniformity of Cell Size" ,"Uniformity of Cell Shape","Marginal Adhesion", 
 +                       "Single Epithelial Cell Size","Bare Nuclei","Bland Chromatin","Normal Nucleoli","Mitoses","class")
-> str(cancerdata)
-'data.frame':	698 obs. of  11 variables:
- $ id                         : int  1002945 1015425 1016277 1017023 1017122 1018099 1018561 1033078 1033078 1035283 ...
- $ Clump Thickness            : int  5 3 6 4 8 1 2 2 4 1 ...
- $ Uniformity of Cell Size    : int  4 1 8 1 10 1 1 1 2 1 ...
- $ Uniformity of Cell Shape   : int  4 1 8 1 10 1 2 1 1 1 ...
- $ Marginal Adhesion          : int  5 1 1 3 8 1 1 1 1 1 ...
- $ Single Epithelial Cell Size: int  7 2 3 2 7 2 2 2 2 1 ...
- $ Bare Nuclei                : chr  "10" "2" "4" "1" ...
- $ Bland Chromatin            : int  3 3 3 3 9 3 3 1 2 3 ...
- $ Normal Nucleoli            : int  2 1 7 1 7 1 1 1 1 1 ...
- $ Mitoses                    : int  1 1 1 1 1 1 1 5 1 1 ...
- $ class                      : int  2 2 2 2 4 2 2 2 2 2 ...
-> #Data preparation
+
+# Data preparation
 > cancerdata$id<- NULL
-> #Converting data into numeric format
+
+#Converting data into numeric format
+
 > cancerdata$`Bare Nuclei`<- as.numeric(cancerdata$`Bare Nuclei`)
 Warning message:
 NAs introduced by coercion 
-> #identify rows without missing data
+# dentify rows without missing data
+
 > cancerdata <- cancerdata[complete.cases(cancerdata),]
-> str(cancerdata)
-'data.frame':	682 obs. of  10 variables:
- $ Clump Thickness            : int  5 3 6 4 8 1 2 2 4 1 ...
- $ Uniformity of Cell Size    : int  4 1 8 1 10 1 1 1 2 1 ...
- $ Uniformity of Cell Shape   : int  4 1 8 1 10 1 2 1 1 1 ...
- $ Marginal Adhesion          : int  5 1 1 3 8 1 1 1 1 1 ...
- $ Single Epithelial Cell Size: int  7 2 3 2 7 2 2 2 2 1 ...
- $ Bare Nuclei                : num  10 2 4 1 10 10 1 1 1 1 ...
- $ Bland Chromatin            : int  3 3 3 3 9 3 3 1 2 3 ...
- $ Normal Nucleoli            : int  2 1 7 1 7 1 1 1 1 1 ...
- $ Mitoses                    : int  1 1 1 1 1 1 1 5 1 1 ...
- $ class                      : int  2 2 2 2 4 2 2 2 2 2 ...
 > cancerdata$class <- factor(ifelse(cancerdata$class == 2, "benign","malignant"))
 > trainingSet <-cancerdata[1:477,1:9]
 > testset <- cancerdata[478:682,1:9]
 > 
 > trainOutcomes <- cancerdata[1:477,10]
 > testOutcomes <- cancerdata[478:682,10]
-> # Apply KNN algorithm to training set and training outcome
+# Apply KNN algorithm to training set and training outcome
 > 
 > library(class)
 > predictions <- knn(train = trainingSet, cl = trainOutcomes,k = 21, 
 +                    test = testset)
 > 
-> #display predictions 
+# display predictions 
 > predictions
   [1] malignant benign    benign    benign    benign    benign    benign   
   [8] benign    benign    benign    benign    benign    benign    malignant
@@ -117,7 +96,7 @@ NAs introduced by coercion
 [204] malignant malignant
 Levels: benign malignant
 > 
-> #model evaluation 
+# model evaluation 
 > table(testOutcomes, predictions)
             predictions
 testOutcomes benign malignant
@@ -152,7 +131,7 @@ predicted       1         1
  $ X1.4    : int  2 1 7 1 7 1 1 1 1 1 ...
  $ X1.5    : int  1 1 1 1 1 1 1 5 1 1 ...
  $ X2.1    : int  2 2 2 2 4 2 2 2 2 2 ...
-> #lable the Data set
+# lable the Data set
 > names(cancerdata)<- c("id","Clump Thickness","Uniformity of Cell Size" ,"Uniformity of Cell Shape","Marginal Adhesion", 
 +                       "Single Epithelial Cell Size","Bare Nuclei","Bland Chromatin","Normal Nucleoli","Mitoses","class")
 > str(cancerdata)
@@ -168,9 +147,9 @@ predicted       1         1
  $ Normal Nucleoli            : int  2 1 7 1 7 1 1 1 1 1 ...
  $ Mitoses                    : int  1 1 1 1 1 1 1 5 1 1 ...
  $ class                      : int  2 2 2 2 4 2 2 2 2 2 ...
-> #Data preparation
+# Data preparation
 > cancerdata$id<- NULL
-> #Converting data into numeric format
+# Converting data into numeric format
 > cancerdata$`Bare Nuclei`<- as.numeric(cancerdata$`Bare Nuclei`)
 Warning message:
 NAs introduced by coercion 
@@ -196,7 +175,7 @@ NAs introduced by coercion
 > library(class)
 > predictions <- knn(train = trainingSet, cl = trainOutcomes,k = 21, 
 +                    test = testset)
-> #display predictions 
+# display predictions 
 > predictions
   [1] malignant benign    benign    benign    benign    benign    benign   
   [8] benign    benign    benign    benign    benign    benign    malignant
@@ -229,7 +208,7 @@ NAs introduced by coercion
 [197] benign    malignant benign    benign    benign    benign    malignant
 [204] malignant malignant
 Levels: benign malignant
-> #model evaluation 
+# model evaluation 
 > table(testOutcomes, predictions)
             predictions
 testOutcomes benign malignant
@@ -251,7 +230,7 @@ actuals         1         1
 predicted       1         1
 > 
 > View(correlation_accuracy)
-> #model evaluation 
+# model evaluation 
 > table(testOutcomes, predictions)
             predictions
 testOutcomes benign malignant
