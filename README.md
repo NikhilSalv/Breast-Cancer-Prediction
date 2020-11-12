@@ -1,0 +1,2 @@
+# Breast-Cancer-Prediction
+In this is Data model, we are going to implement predictive analytics using R to diagnose whether or not the person has breast cancer based on past medical data.  The data set is collected from the university of California website consisting of breast cancer cases and this is data set will be used to build predictive model to classify a human as a malignant or benign based of certain feature variables.
